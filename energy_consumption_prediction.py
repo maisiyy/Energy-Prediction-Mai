@@ -1,7 +1,6 @@
 import streamlit as st
 import numpy as np
 import pickle
-from sklearn.preprocessing import StandardScaler
 
 # Load the pre-trained model and scaler
 with open('logistic_regression_model.pkl', 'rb') as model_file:
