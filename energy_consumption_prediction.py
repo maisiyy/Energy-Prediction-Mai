@@ -3,9 +3,12 @@ import numpy as np
 import pickle
 from sklearn.preprocessing import StandardScaler
 
-# Load the pre-trained model
+# Load the pre-trained model and scaler
 with open('logistic_regression_model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
+
+with open('scaler.pkl', 'rb') as scaler_file:
+    scaler = pickle.load(scaler_file)
 
 # Set up the title of the app
 st.title("Energy Consumption Prediction for Smart Homes")
@@ -22,9 +25,8 @@ if st.button("Predict Energy Consumption"):
     # Prepare the input data for prediction
     input_data = np.array([[T1, RH_1, T_out]])
 
-    # Scale the input data (use the same scaler as during training)
-    scaler = StandardScaler()
-    input_data_scaled = scaler.fit_transform(input_data)
+    # Scale the input data using the loaded scaler
+    input_data_scaled = scaler.transform(input_data)
 
     # Make prediction using the model
     prediction = model.predict(input_data_scaled)
